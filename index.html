@@ -61,6 +61,12 @@
 					</ul>
 					</aside>
 			</section>
+			<section data-background-image="https://media.giphy.com/media/XzkGfRsUweB9ouLEsE/giphy.gif">
+					<h3>Our sites when javascript is turned off</h3>
+			</section>
+			<section data-background-image="https://media.giphy.com/media/dYmDsXoEg2egOBcfrm/giphy.gif">
+				<h3>next.js site</h3>
+		</section>
 			<section>
 				<section>
 					<h3>Companies / Sites Using Next.Js</h3>
@@ -128,13 +134,175 @@
 					What about /user/:name? We'll look at more advanced and dynamic routing later on.
 			</section>
 			<section>
-				<h3></h3>
+				<h3>Links and Prefetching</h3>
 					<pre><code>import Link from 'next/link';
 // ...
 <Link href="/contact">
 <a>Contact me</a>
 </Link>;
 						</code></pre>
+						<aside class="notes">
+								Pass to code example. Pre fetching now occurs automatically when the links appear in current version of next
+								<pre><code><Link prefetch={false} href='/about'>
+<a
+onMouseEnter={() => {
+router.prefetch('/about')
+console.log('prefetching /about!')
+}}
+>
+									</a>
+									</code></pre>
+								</aside>
+			</section>
+			<section data-background-image="https://media.giphy.com/media/WPtzThAErhBG5oXLeS/giphy.gif">
+					<h1>Prefetching</h1>
+			</section>
+			<section>
+				<section>
+					<h3>What about viewport, common styles, etc?</h3>
+					<p>Introducing the first magic file (i.e. Next system file):</p>
+
+					<p>_document.js</p>
+					<aside class="notes">
+							Only runs server side, so won't execute anything in the browser, so don't try to attach event handlers like onClick for instance.
+					</aside>
+				</section>
+					<section>
+					<pre><code>
+import Document, { Head, Main, NextScript } from 'next/document';
+export default class MyDocument extends Document {
+render() {
+return (
+<html>
+<Head>
+<meta name="viewport" content="width=device-width" />
+</Head>
+<body>
+<Main />
+<NextScript />
+</body>
+</html>
+);
+}
+}
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<h3>Static Assets</h3>
+				These live in <code>/public</code>, a system folder to Next.
+				<pre><code><link rel="stylesheet" href="/style.css" /></code></pre>
+			</section>
+
+			<section>
+				<section>
+				<h3>Error Pages</h3>
+				<img src="https://talks.next.isthe.link/images/404.png">
+				</section>
+				<section>
+						<p>To add a custom error page, we:</p>
+						<ol>
+							<li>Add /pages/_error.js</li>
+							<li>And return custom content.</li>
+						</ol>
+						<pre><code>export default () => <h1>Nope.</h1>;</code></pre>
+						<aside class="notes">
+								import React from 'react';
+								export default class Error extends React.Component {
+								  static getInitialProps({ res, err }) {
+									const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+									return { statusCode };
+								  }
+								  render() {
+									return <div className="error">{this.props.statusCode}</div>;
+								  }
+								}
+						</aside>
+				</section>
+			</section>
+			<section data-background-image="https://media.giphy.com/media/oO8yKcmTxjrm0Ony4f/giphy.gif">
+				<h1>CSS in JS</h1>
+			</section>
+			<section>
+				<section>
+				<h3>getInitialProps</h3>
+				<ul>
+					<li>static method</li>
+					<li>async suppport</li>
+					<li>return object is the components props</li>
+					<li>only available on pages</li>
+					<li>is <b>not</b> ran on prefectching</li>
+				</ul>
+				</section>
+				<section>
+						getInitialProps context argument object
+						<ul>
+							<li>req - HTTP request object (server only)</li>
+							<li>res - HTTP response object (server only)</li>
+							<li>query - query string section of URL parsed as an object</li>
+							<li>pathname - path section of URL</li>
+							<li>asPath - String of the actual path (including the query) shows in the browser</li>
+							<li>err - Error object if any error is encountered during the rendering</li>
+						</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Clean URLs</h3>
+					/session?slug=mentoring 😟<br/>
+					/session/mentoring 👍
+					</section>
+					<section>
+						<pre><code><Link
+							href="/session?slug=mentoring"
+							as="/session/mentoring"
+						  ></code></pre>
+						  <aside class="notes">
+								Old way - Doesn't work server side<br/>
+								Had to put a manual hack into server.js to get this to work
+						</aside>
+					</section>
+					<section>
+							<h2>Native dynamic routing</h2>
+							pages/session/[slug].js => localhost:3000/session/:slug<br/>
+							pages/[user]/posts/[id].js => localhost:3000/:user/posts/:id
+
+							<pre><code><Link
+								href="/session/[slug]"
+							  >
+	<a>{session.title}</a>
+</Link>
+</code></pre>
+					</section>
+			</section>
+			<section>
+				<h2>Custom page transitions</h2>
+				We can hook into the routing Next uses
+				<pre><code>
+import router from 'next/router';
+import NProgress from 'nprogress';
+router.onRouteChangeStart = () => NProgress.start();
+router.onRouteChangeComplete = () => NProgress.done();
+router.onRouteChangeError = () => NProgress.done();
+				</code></pre>
+			</section>
+			<section>
+				<section>
+					<h3>APIs without custom server logic</h3>
+					<p>Add a special pages/api directory and now:</p>
+					
+					<p>pages/api/index.js => localhost:3000/api</p>
+					<p>pages/api/session/[slug].js => localhost:3000/api/session/:slug</p>
+					<aside class="notes">
+						I dont like this
+					</aside>
+				</section>
+				<section data-background-image="https://media.giphy.com/media/l0IxZpEsbQYba4h6E/giphy.gif">
+
+				</section>
+			</section>
+			<section data-background-image="https://media.giphy.com/media/ie76dJeem4xBDcf83e/giphy.gif">
+				Next.js adoption in the near future
 			</section>
 		</div>
 	</div>

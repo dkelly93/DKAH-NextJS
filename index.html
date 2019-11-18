@@ -1,49 +1,168 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<img src="https://camo.githubusercontent.com/1f8dec51cb01842d7bb7a7cd50ade17c75c5e3bd/68747470733a2f2f6173736574732e7a6569742e636f2f696d6167652f75706c6f61642f76313533383336313039312f7265706f7369746f726965732f6e6578742d6a732f6e6578742d6a732e706e67"
+				    style="background-color:white" />
+				<h3>The React Framework</h3>
+				<p>
+					<small>David Kelly and Andrew Hiles</small>
+				</p>
+			</section>
+			<section>
+				<h3>Why?</h3>
+				<ul>
+					<li>File-System Routing</li>
+					<li>Automatic Code Splitting</li>
+					<li>Server Side Rendering</li>
+					<li>Static Exporting</li>
+					<li>and more...</li>
+				</ul>
+				<aside class="notes">
+					<ul>
+						<li>Next.js will serve each file in /pages under a pathname matching the filename. (Talk more about this in a few slides)</li>
+
+						<li>Every import you declare gets bundled and served with each page. That means pages never load unnecessary code!</li>
+
+						<li>What it says on the tin. Superior performance with lightning fast delivery of content</li>
+
+						<li>Static exporting out of the box</li>
+
+						<li>Express custom server</li>
+						<li>Prefetching</li>
+						<li>Styled Components</li>
+						<li>Parameterized Routing</li>
+					</ul>
+					</aside>
+			</section>
+			<section>
+				<section>
+					<h3>Companies / Sites Using Next.Js</h3>
+					<ul>
+						<li>ZEIT - https://zeit.co/</li>
+						<li>Netflix - https://jobs.netflix.com/</li>
+						<li>Trulia - https://twitter.com/Timcorreia/status/950974800234668032</li>
+						<li>Github - https://twitter.com/rauchg/status/972335233176543232</li>
+						<li>Hulu - https://hulu.com</li>
+						<li>Nike - https://www.nike.com/help</li>
+						<li>npm - https://www.npmjs.com/search?q=next</li>
+						<li>Magic Leap - https://magicleap.com</li>
+						<li>Ticketmaster - https://www.ticketmaster.com/new</li>
+				</section>
+				<section>
+					<li>Invision - https://www.invisionapp.com/</li>
+					<li>Deliveroo - https://deliveroo.co.uk/restaurants/london/the-city</li>
+					<li>Auth0 - https://auth0.com/careers</li>
+					<li>Scale - https://www.scaleapi.com/</li>
+					<li>Eaze - https://www.eaze.com/</li>
+					<li>Elton John - https://eltonjohn.com</li>
+					<li>Hashnode - https://hashnode.com</li>
+					<li>SumUp - https://sumup.com/</li>
+					<li>Expo - https://expo.io/</li>
+					<li>IOTA - https://data.iota.org</li>
+					<li>Avocode - https://avocode.com/</li>
+				</section>
+				<section>
+					<li>OpenCollective - https://opencollective.com/</li>
+					<li>Plotly - https://plot.ly/</li>
+					<li>Underbelly - https://underbelly.is/</li>
+					<li>nteract - https://nteract.io/</li>
+					<li>InStitchu - https://www.institchu.com/</li>
+				</section>
+				</ul>
+				<section data-background-image="https://media.giphy.com/media/xUPGcircwZQCYVto40/giphy.gif">
+					<h1>Yes... Elton John</h1>
+				</section>
+			</section>
+			<section>
+					<h3>Some of our pain points</h1>
+					<ul>
+					<li>Webpack</li>
+					<li>Keeping up</li>
+					<li>Spaghetti code and logic</li>
+					<li>It can be time consuming to get a simple app up and running with all the build chain / framework scaffolding required</li>
+					<li>Duplication of code between front end and back end</li>
+					<li>Sever side rendering and rehydration</li>
+					<li>ALL THE CONFIGURATION</li>
+				</ul>
+			</section>
+			<section>
+				<h3>Zero config out of the box</h3>
+			</section>
+			<section data-background-image="https://media.giphy.com/media/ckeHl52mNtoq87veET/giphy.gif">
+				<s>Webpack config</s>
+			</section>
+			<section>
+					<h3>pages = routing system</h3>
+					pages/index.js => localhost:3000/<br/>
+					pages/about.js => localhost:3000/about<br/>
+					pages/user/index.js => localhost:3000/user<br/>
+					pages/user/dk.js => localhost:3000/user/dk<br/>
+					pages/user/andrewspolo.js => localhost:3000/user/andrewspolo<br/>
+					What about /user/:name? We'll look at more advanced and dynamic routing later on.
+			</section>
+			<section>
+				<h3></h3>
+					<pre><code>import Link from 'next/link';
+// ...
+<Link href="/contact">
+<a>Contact me</a>
+</Link>;
+						</code></pre>
+			</section>
 		</div>
+	</div>
 
-		<script src="js/reveal.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [{
+					src: 'plugin/markdown/marked.js'
+				},
+				{
+					src: 'plugin/markdown/markdown.js'
+				},
+				{
+					src: 'plugin/notes/notes.js',
+					async: true
+				},
+				{
+					src: 'plugin/highlight/highlight.js',
+					async: true
+				}
+			]
+		});
+	</script>
+</body>
+
 </html>
